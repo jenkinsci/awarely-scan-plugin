@@ -1,7 +1,9 @@
 package io.jenkins.plugins.awarely;
 
+import hudson.BulkChange;
 import hudson.Extension;
 import hudson.model.Job;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,6 +46,7 @@ public final class AwarelyConfiguration extends GlobalConfiguration {
     @DataBoundSetter
     public void setSyncJobs(String value) {
         syncJobs = names(value);
+        save();
     }
 
     public String getHostScanJobs() {
@@ -61,26 +64,31 @@ public final class AwarelyConfiguration extends GlobalConfiguration {
     @DataBoundSetter
     public void setApiOrigins(String value) {
         apiOrigins = names(value);
+        save();
     }
 
     @DataBoundSetter
     public void setAllowToolDownloads(boolean value) {
         allowToolDownloads = value;
+        save();
     }
 
     @DataBoundSetter
     public void setRemoteJobs(String value) {
         remoteJobs = names(value);
+        save();
     }
 
     @DataBoundSetter
     public void setHostScanJobs(String value) {
         hostScanJobs = names(value);
+        save();
     }
 
     @DataBoundSetter
     public void setTrustedAgents(String value) {
         trustedAgents = names(value);
+        save();
     }
 
     @Override
@@ -92,8 +100,12 @@ public final class AwarelyConfiguration extends GlobalConfiguration {
     @Override
     public boolean configure(StaplerRequest2 req, JSONObject json) throws FormException {
         Jenkins.get().checkPermission(Jenkins.ADMINISTER);
-        req.bindJSON(this, json);
-        save();
+        try (BulkChange change = new BulkChange(this)) {
+            req.bindJSON(this, json);
+            change.commit();
+        } catch (IOException error) {
+            throw new FormException(error, "");
+        }
         return true;
     }
 

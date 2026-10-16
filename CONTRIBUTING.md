@@ -8,6 +8,10 @@ GitHub Actions builds on Linux amd64 and arm64, checks for committed secrets, an
 
 `Jenkinsfile` supplies the Jenkins project `buildPlugin()` entry point once hosting is approved. `.mvn/` enables Jenkins Incrementals; publication still requires infrastructure permissions. Release automation is deliberately gated as described in [hosting readiness](docs/hosting.md).
 
+## Global configuration persistence
+
+`AwarelyConfiguration` setters save validated changes immediately, including calls from an administrator's Script Console. The configuration form wraps binding in Jenkins `BulkChange` and commits once after all fields are bound. Keep the ADMINISTER check before binding. `ConfigurationPersistenceTest` checks independent setter persistence, one write for a multi-field form submission, and rejection of invalid setter values without changing memory or disk; `AuthorityTest` covers access control.
+
 ## Repository extraction
 
 This repository preserves the two plugin commits from `awarelyeu/awarely-sbom-scanner` using `git subtree split --prefix=jenkins-plugin` at commit `ededef42ee16aea0dc351b1cf570695c283efe6f`. The extracted tip is `02532d3b27dd270151e4864b7d1b6bd6efebd435`. Source files, test files and the pinned CLI manifest are unchanged by extraction; metadata, workflows and documentation are adjusted for the standalone repository.
