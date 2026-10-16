@@ -29,7 +29,7 @@
   </scm>
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
-    <gitHubRepo>awarelyeu/awarely-scan-plugin</gitHubRepo>
+    <gitHubRepo>jenkinsci/awarely-scan-plugin</gitHubRepo>
     <jenkins.baseline>2.580</jenkins.baseline>
     <jenkins.version>${jenkins.baseline}.1</jenkins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

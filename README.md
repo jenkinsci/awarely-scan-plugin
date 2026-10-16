@@ -1,6 +1,6 @@
 # Awarely Scan for Jenkins
 
-**Stable release: 0.2.0. Available as a verified HPI on GitHub.**
+**Official source: jenkinsci/awarely-scan-plugin. Historical stable HPI: 0.2.0.**
 
 [Download and verify the HPI](docs/releases.md). Pins: CLI v0.12.0 and managed Syft 1.54.1.
 
@@ -8,12 +8,12 @@ Generate an SBOM during a build, check it with Awarely Monitor, and explicitly s
 
 [English walkthrough](docs/how-to.md) · [Ghid în română](docs/how-to.ro.md) · [Security boundaries](SECURITY.md)
 
-This is the dedicated plugin repository. The [Awarely CLI](https://github.com/awarelyeu/awarely-sbom-scanner) has its own source and release cycle. Jenkins project hosting has not yet been approved; the plugin is not currently in the Jenkins Update Center. See [hosting readiness](docs/hosting.md).
+This is the dedicated plugin repository. The [Awarely CLI](https://github.com/awarelyeu/awarely-sbom-scanner) has its own source and release cycle. Jenkins project hosting and release permissions are approved. The first Jenkins Update Center release is being prepared. See [hosting readiness](docs/hosting.md).
 
-[![Build](https://github.com/awarelyeu/awarely-scan-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/awarelyeu/awarely-scan-plugin/actions/workflows/build.yml)
-[![Jenkins Security Scan](https://github.com/awarelyeu/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml/badge.svg)](https://github.com/awarelyeu/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml)
+[![Build](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/build.yml)
+[![Jenkins Security Scan](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml/badge.svg)](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml)
 
-Download the current stable **0.2.0** release from [this repository's releases](https://github.com/awarelyeu/awarely-scan-plugin/releases/tag/v0.2.0). The historical **0.1.0-alpha.1** preview and its original signatures remain in the scanner repository; see [release verification](docs/releases.md).
+Download the preserved historical **0.2.0** release from [this repository's releases](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0). The historical **0.1.0-alpha.1** preview and its original signatures remain in the scanner repository; see [release verification](docs/releases.md).
 
 ## Supported workflows
 

@@ -1,6 +1,6 @@
 # Hosting request — Awarely Scan
 
-Submitted on 2026-10-14: [Jenkins hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383). Awaiting hosting-team review; this is not an approval or an Update Center release. The owner confirmed the required initial Jira and Artifactory sign-ins for Jenkins username `awarely_ro`.
+Submitted on 2026-10-14: [Jenkins hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383). Approved and completed on 2026-10-16; the canonical repository is [jenkinsci/awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). Hosting approval alone is not an Update Center release. The owner confirmed the required initial Jira and Artifactory sign-ins for Jenkins username `awarely_ro`.
 
 ## Repository URL
 
@@ -20,7 +20,7 @@ The plugin uses administrator allowlists for remote actions, host inventory and 
 
 The default-branch [Build](https://github.com/awarelyeu/awarely-scan-plugin/actions/runs/38480581323) and [Jenkins Security Scan](https://github.com/awarelyeu/awarely-scan-plugin/actions/runs/38480581851) passed for commit `a710386ffe72055d7e428819e8cdb811d4f27643`. No open GitHub CodeQL alerts were reported when preparing this request.
 
-Official Jenkins CD is prepared for manual triggering after successful Jenkins CI, with activation gated on hosting/CD review and Jenkins-provisioned credentials. See [hosting readiness](https://github.com/awarelyeu/awarely-scan-plugin/blob/main/docs/hosting.md).
+Official Jenkins CD is prepared for manual triggering after successful Jenkins CI, with activation gated on hosting/CD review and Jenkins-provisioned credentials. See [hosting readiness](https://github.com/jenkinsci/awarely-scan-plugin/blob/main/docs/hosting.md).
 
 Repository handoff: if possible, please use a coordinated transfer rather than deleting the original repository after a fork. This repository already contains six releases with HPI assets and provenance bundles, plus pull-request review history. We would like to preserve those assets, links and review records while making `jenkinsci/awarely-scan-plugin` canonical. We will follow the hosting team's instructions for the handoff and subsequent repository metadata changes.
 
