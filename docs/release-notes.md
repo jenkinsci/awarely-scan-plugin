@@ -1,4 +1,4 @@
-# First Jenkins-hosted release
+# First Jenkins-hosted release: 18.v7f17b_86cf4b_8
 
 The plugin is now maintained in `jenkinsci/awarely-scan-plugin` and uses the official Jenkins release workflow and version format. The plugin ID remains `awarely-scan`; existing installations can upgrade normally.
 

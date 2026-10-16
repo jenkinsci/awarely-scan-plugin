@@ -1,16 +1,16 @@
 # Awarely Scan for Jenkins
 
-**Official source: jenkinsci/awarely-scan-plugin. Historical stable HPI: 0.2.0.**
+**Jenkins-hosted release: 18.v7f17b_86cf4b_8. Official source: jenkinsci/awarely-scan-plugin.**
 
-[Download and verify the HPI](docs/releases.md). Pins: CLI v0.12.0 and managed Syft 1.54.1.
+[Install the plugin and review release formats](docs/releases.md). Pins: CLI v0.12.0 and managed Syft 1.54.1.
 
 Generate an SBOM during a build, check it with Awarely Monitor, and explicitly synchronize one inventory source when appropriate. The plugin uses the same CLI and managed Syft as the terminal workflow. It does not build your application or install its dependencies.
 
 [English walkthrough](docs/how-to.md) · [Ghid în română](docs/how-to.ro.md) · [Security boundaries](SECURITY.md)
 
-This is the dedicated plugin repository. The [Awarely CLI](https://github.com/awarelyeu/awarely-sbom-scanner) has its own source and release cycle. Jenkins project hosting and release permissions are approved. The first Jenkins Update Center release is being prepared. See [hosting readiness](docs/hosting.md).
+This is the dedicated plugin repository. The [Awarely CLI](https://github.com/awarelyeu/awarely-sbom-scanner) has its own source and release cycle. Jenkins project hosting and release permissions are approved. The first official release has been published to the Jenkins artifact repository; Update Center and plugin-site indexing can follow later. See [hosting readiness](docs/hosting.md).
 
-[![Build](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/build.yml)
+[![Jenkins CI](https://ci.jenkins.io/job/Plugins/job/awarely-scan-plugin/job/main/badge/icon)](https://ci.jenkins.io/job/Plugins/job/awarely-scan-plugin/job/main/)
 [![Jenkins Security Scan](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml/badge.svg)](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml)
 
 Download the preserved historical **0.2.0** release from [this repository's releases](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0). The historical **0.1.0-alpha.1** preview and its original signatures remain in the scanner repository; see [release verification](docs/releases.md).
@@ -49,4 +49,4 @@ mvn -B -ntp verify
 
 The output is `target/awarely-scan.hpi`. Development tool manifests deliberately fail closed until release archive and executable digests have been authenticated. Do not replace pins with arbitrary downloads or bypass verification.
 
-Future Jenkins releases use the Jenkins Incrementals/CD version scheme. A local development build is a snapshot, not a replacement for the published release. See [contributing](CONTRIBUTING.md) and [release verification](docs/releases.md).
+Jenkins-hosted releases use the Jenkins Incrementals/CD version scheme. A local development build is a snapshot, not a replacement for the published release. See [contributing](CONTRIBUTING.md) and [release verification](docs/releases.md).
