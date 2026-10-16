@@ -1,6 +1,6 @@
 # Jenkins: de la instalare la prima verificare
 
-Codul pluginului, documentația și release-urile curente sunt în [awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). Hosting-ul Jenkins și permisiunile de publicare sunt aprobate; pregătim primul release găzduit de Jenkins.
+Codul pluginului, documentația și release-urile curente sunt în [awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). Primul release oficial, **18.v7f17b_86cf4b_8**, a fost publicat în repository-ul de artefacte Jenkins. Indexarea în Update Center și pe pagina pluginului poate dura suplimentar.
 
 Acest ghid acoperă release-urile găzduite de Jenkins și HPI-ul istoric 0.2.0 de pe GitHub. Începe pe un Jenkins de staging. [Ghidul de release](releases.md) explică formatele și verificarea.
 
@@ -10,7 +10,7 @@ Ai nevoie de Jenkins 2.580.1 sau mai nou, un Java compatibil cu versiunea Jenkin
 
 Pentru un release găzduit de Jenkins, deschide **Manage Jenkins → Plugins → Available plugins**, caută **Awarely Scan**, selectează-l și instalează-l. Jenkins rezolvă dependențele necesare. Pentru Jenkinsfile, instalează și **Pipeline**. Repornește după terminarea build-urilor și confirmă că **Awarely Scan** apare în **Installed plugins**, fără eroare de încărcare. Verifică avertismentele de securitate din **Manage Jenkins**.
 
-Dacă primul release nu apare încă, actualizează metadatele Update Center și verifică [pagina pluginului](https://plugins.jenkins.io/awarely-scan/). Propagarea poate dura. Pentru instalarea istorică/manuală, descarcă [HPI-ul 0.2.0 păstrat](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0), urmează [verificarea originală a provenienței și checksum-ului](releases.md), instalează **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** și **Commons Compress API**, apoi încarcă HPI-ul în **Plugins → Advanced settings → Deploy Plugin**. Versiunea istorică 0.2.0 nu include corecțiile ulterioare din review-ul Jenkins.
+Dacă release-ul nu apare încă, actualizează metadatele Update Center și verifică [pagina pluginului](https://plugins.jenkins.io/awarely-scan/). Propagarea poate dura. Pentru instalarea manuală a release-ului oficial curent, urmează [instrucțiunile de descărcare și checksum din Jenkins Maven](releases.md#manual-installation-of-the-current-jenkins-release), instalează **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** și **Commons Compress API**, apoi încarcă HPI-ul în **Plugins → Advanced settings → Deploy Plugin**. Versiunea istorică 0.2.0 rămâne disponibilă pentru referință, dar nu include corecțiile ulterioare din review-ul Jenkins.
 
 În **Manage Jenkins → System → Awarely Scan**, administratorul configurează:
 

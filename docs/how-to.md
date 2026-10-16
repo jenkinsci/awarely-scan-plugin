@@ -1,6 +1,6 @@
 # Jenkins: from installation to your first inventory check
 
-Plugin source, documentation and current releases live in [awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). Jenkins hosting and release permissions are approved; the first hosted release is being prepared.
+Plugin source, documentation and current releases live in [awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). The first official release, **18.v7f17b_86cf4b_8**, has been published to the Jenkins artifact repository. Update Center and plugin-site indexing may take additional time.
 
 This guide covers Jenkins-hosted releases and the historical 0.2.0 GitHub HPI. Start with a staging Jenkins controller. [Release formats and verification](releases.md) explains the difference.
 
@@ -10,7 +10,7 @@ You need Jenkins 2.580.1 or newer, a supported Jenkins Java runtime (JDK 21 for 
 
 For a Jenkins-hosted release, open **Manage Jenkins → Plugins → Available plugins**, search for **Awarely Scan**, select it and install it. Jenkins resolves the required plugin dependencies. For Jenkinsfiles, also install **Pipeline**. Restart when no builds are running, then confirm **Awarely Scan** appears under **Installed plugins** without a loading error. Review security warnings in **Manage Jenkins**.
 
-If the first release has not yet appeared, refresh the Update Center metadata and check the [plugin page](https://plugins.jenkins.io/awarely-scan/). Publication can take time to propagate. For historical/manual installation, download the [preserved 0.2.0 HPI](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0), follow [its original provenance and checksum verification](releases.md), install **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** and **Commons Compress API**, then upload the HPI under **Plugins → Advanced settings → Deploy Plugin**. Historical 0.2.0 does not contain the later hosting-review fixes.
+If the release has not yet appeared, refresh the Update Center metadata and check the [plugin page](https://plugins.jenkins.io/awarely-scan/). Publication can take time to propagate. For manual installation of the current official release, follow the [Jenkins Maven download and checksum instructions](releases.md#manual-installation-of-the-current-jenkins-release), install **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** and **Commons Compress API**, then upload the HPI under **Plugins → Advanced settings → Deploy Plugin**. Historical 0.2.0 remains available for reference, but does not contain the later hosting-review fixes.
 
 In **Manage Jenkins → System → Awarely Scan**:
 

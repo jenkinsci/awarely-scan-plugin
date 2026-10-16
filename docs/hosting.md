@@ -1,6 +1,6 @@
 # Jenkins project hosting readiness
 
-Status: [hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383) was approved and completed on 2026-10-16. The canonical repository is **jenkinsci/awarely-scan-plugin**. [Release permissions PR #5388](https://github.com/jenkins-infra/repository-permissions-updater/pull/5388) is merged with CD enabled; the maintainer accepted the organization invitation and Jenkins-provisioned Maven credentials are present. Official Jenkins CI is active. The first Update Center release is being prepared; historical GitHub 0.2.0 is not an Update Center release.
+Status: [hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383) was approved and completed on 2026-10-16. The canonical repository is **jenkinsci/awarely-scan-plugin**. [Release permissions PR #5388](https://github.com/jenkins-infra/repository-permissions-updater/pull/5388) is merged with CD enabled; the maintainer accepted the organization invitation and Jenkins-provisioned Maven credentials are present. Official Jenkins CI is active. The first official release, **18.v7f17b_86cf4b_8**, was published through Jenkins CD on 2026-10-16. Update Center and plugin-site indexing may follow later; historical GitHub 0.2.0 is not an Update Center release.
 
 ## Prepared in this repository
 
@@ -16,7 +16,7 @@ Status: [hosting request #5383](https://github.com/jenkins-infra/repository-perm
 
 ## Submission record
 
-1. The [current verified release](releases.md) is 0.2.0. It adds NuGet and Go checks through CLI v0.12.0 and the Monitor service, retaining job approval, credentials and policy boundaries. Manual acceptance and automated checks are recorded in the release documentation. GitHub releases are built and attested in this repository; historical previews remain unchanged.
+1. At submission, the [verified GitHub release](releases.md) was 0.2.0. It adds NuGet and Go checks through CLI v0.12.0 and the Monitor service, retaining job approval, credentials and policy boundaries. Manual acceptance and automated checks are recorded in the release documentation. Those GitHub releases were built and attested in the original awarelyeu repository; their preserved assets remain unchanged.
 2. The owner confirmed the required initial Jira and Artifactory sign-ins for Jenkins community username `awarely_ro`, now recorded in the request. The GitHub maintainer is `awarelyeu`; GitHub and Jenkins usernames are independent.
 3. Default-branch Build and Jenkins Security Scan passed for `a710386ffe72055d7e428819e8cdb811d4f27643`; the GitHub CodeQL alerts query reported no open alerts before submission. The request follows the [official hosting form](https://github.com/jenkins-infra/repository-permissions-updater/issues/new?template=1-hosting-request.yml), requests official GitHub-based releases, and asks the hosting team to coordinate repository transfer to preserve existing releases, assets and review history. Do not provide personal Maven tokens in the issue.
 
@@ -31,7 +31,7 @@ The [hosting security scan](https://github.com/jenkins-infra/repository-permissi
 - The credential dropdown endpoint now requires POST, retaining its item-level `Item.CONFIGURE` authorization check. Jenkins's existing credentials selector already sends POST requests with a CSRF crumb. `AuthorityTest` exercises the HTTP endpoint and the authenticated configuration form, including rejection of GET and POST requests without a valid crumb and refusal to enumerate credentials for read-only users.
 - `MonitorCredential.sourceKey` is a non-secret SHA-256 identity derived only from canonical API origin, application ID and source ID. It does not contain or hash the token. A field-specific `jenkins/plaintext-storage` suppression documents this false positive. `MonitorCredentialTest` checks its known digest, token rotation, canonical origin handling, persisted writer protection and token-free persisted metadata. The digest algorithm is unchanged so existing source bindings remain effective.
 
-These changes are in the source tree for the next release; they do not replace the already published 0.2.0 HPI. The [official re-scan passed](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383#issuecomment-6203413705). Hosting was subsequently approved.
+These changes are included in Jenkins-hosted **18.v7f17b_86cf4b_8**; they do not replace the historical 0.2.0 HPI. The [official re-scan passed](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383#issuecomment-6203413705). Hosting was subsequently approved.
 
 The hosting team forked the repository into `jenkinsci/awarely-scan-plugin`, granted maintainer access and arranged artifact permissions.
 
@@ -60,7 +60,7 @@ Following [Markus Winter's review](https://github.com/jenkins-infra/repository-p
 - Tested the actual `awarelyScan` step across a forcibly restarted controller, paused before agent/API access. The supported SimpleBuildStep/CoreStep Pipeline bridge fails active nonresumable execution without replay or normal downstream continuation. This is not durable-process support; the user guide states the limitation and uncertain-sync recovery.
 - Retained release-authenticated tool pins, bounded no-follow/hardlink-rejecting reads, create-new private inventory copies, and ADMINISTER-only authority changes. Arbitrary tool manifests would change executable provenance; generic copy/containment helpers do not implement all the retained file checks. Added focused file and authority regressions rather than relaxing those controls.
 
-These are source changes for the next release, not a replacement of existing signed release assets.
+These changes are included in Jenkins-hosted **18.v7f17b_86cf4b_8**. Existing signed GitHub release assets remain unchanged.
 
 ## Official references
 
@@ -72,3 +72,11 @@ These are source changes for the next release, not a replacement of existing sig
 - [Incrementals](https://www.jenkins.io/doc/developer/plugin-development/incrementals/)
 - [Official CD setup and review](https://www.jenkins.io/doc/developer/publishing/releasing-cd/)
 - [Experimental release status](https://www.jenkins.io/doc/developer/publishing/releasing-experimental-updates/)
+
+## First official publication
+
+- [Validation-only run](https://github.com/jenkinsci/awarely-scan-plugin/actions/runs/38977618980) passed before publishing.
+- [Official release run](https://github.com/jenkinsci/awarely-scan-plugin/actions/runs/38977793596) published `18.v7f17b_86cf4b_8` from verified commit `7f17b86cf4b8b4cfa254176fd0fb9036bfa830ff`.
+- The exact commit passed all 62 tests on ci.jenkins.io, SpotBugs and Jenkins Security Scan; no open CodeQL alerts were reported.
+- The downloaded Maven HPI matched its repository SHA-256 and declared the expected plugin ID, version and Jenkins 2.580.1 minimum.
+- The original repository is archived with a move notice. All six historical releases and 36 assets remain accessible in both repositories.
