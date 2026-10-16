@@ -1,18 +1,16 @@
 # Jenkins: from installation to your first inventory check
 
-Plugin source, documentation and current releases live in [awarely-scan-plugin](https://github.com/awarelyeu/awarely-scan-plugin). Jenkins Update Center publication is pending hosting approval.
+Plugin source, documentation and current releases live in [awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). Jenkins hosting and release permissions are approved; the first hosted release is being prepared.
 
-This guide covers stable release 0.2.0, distributed on GitHub. Start with a staging Jenkins controller and use the verified HPI from the [release guide](releases.md).
+This guide covers Jenkins-hosted releases and the historical 0.2.0 GitHub HPI. Start with a staging Jenkins controller. [Release formats and verification](releases.md) explains the difference.
 
 ## 1. Prepare Jenkins once
 
 You need Jenkins 2.580.1 or newer, a supported Jenkins Java runtime (JDK 21 for this plugin's tested baseline), and a Linux amd64 or arm64 agent running as a regular user. Keep the controller's executors at zero. Application builds may require Node.js/npm, Python or Maven/Java; the scanner itself does not require these runtimes for reading existing files.
 
-Download the HPI from the [plugin release](https://github.com/awarelyeu/awarely-scan-plugin/releases/tag/v0.2.0) and follow [provenance and checksum verification](releases.md). Installing a plugin grants controller code execution.
+For a Jenkins-hosted release, open **Manage Jenkins → Plugins → Available plugins**, search for **Awarely Scan**, select it and install it. Jenkins resolves the required plugin dependencies. For Jenkinsfiles, also install **Pipeline**. Restart when no builds are running, then confirm **Awarely Scan** appears under **Installed plugins** without a loading error. Review security warnings in **Manage Jenkins**.
 
-Under **Manage Jenkins → Plugins → Available plugins**, install or update these dependencies: **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** and **Commons Compress API**. Jenkins resolves their dependencies too. For Jenkinsfiles, also install **Pipeline**. Review security warnings in **Manage Jenkins**.
-
-Then open **Plugins → Advanced settings → Deploy Plugin**, select the verified HPI and upload it. Restart Jenkins when no builds are running. Confirm **Awarely Scan** appears under **Installed plugins**, without a loading error. The HPI is distributed here; this plugin is not yet listed in the Jenkins Update Center.
+If the first release has not yet appeared, refresh the Update Center metadata and check the [plugin page](https://plugins.jenkins.io/awarely-scan/). Publication can take time to propagate. For historical/manual installation, download the [preserved 0.2.0 HPI](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0), follow [its original provenance and checksum verification](releases.md), install **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** and **Commons Compress API**, then upload the HPI under **Plugins → Advanced settings → Deploy Plugin**. Historical 0.2.0 does not contain the later hosting-review fixes.
 
 In **Manage Jenkins → System → Awarely Scan**:
 
@@ -25,7 +23,7 @@ In **Manage Jenkins → System → Awarely Scan**:
 
 A local application scan needs no Monitor account or credential. The tool cache lives outside the job workspace, under the agent root's `.awarely-scan` directory, with owner-only permissions. To operate without downloads, an administrator must populate the pinned release archive cache and the CLI's verified Syft cache in advance. An absent or modified archive stops the step.
 
-**Network paths:** on current `main` (the next release after v0.2.0), the controller downloads a missing CLI archive using Jenkins' global proxy configuration, including its bypass list. Configure the proxy in **Manage Jenkins → Plugins → Advanced settings**. The controller verifies the pinned digest, then sends the public archive over Jenkins Remoting; the agent verifies it again before execution. Proxy credentials stay on the controller. Cached archives need no network request. In v0.2.0, CLI downloads still originate directly from the agent.
+**Network paths:** in Jenkins-hosted releases after historical v0.2.0, the controller downloads a missing CLI archive using Jenkins' global proxy configuration, including its bypass list. Configure the proxy in **Manage Jenkins → Plugins → Advanced settings**. The controller verifies the pinned digest, then sends the public archive over Jenkins Remoting; the agent verifies it again before execution. Proxy credentials stay on the controller. Cached archives need no network request. In v0.2.0, CLI downloads still originate directly from the agent.
 
 Managed Syft downloads and Monitor Check/Sync requests still originate from the agent through the fixed CLI. They do **not** inherit Jenkins' controller proxy or proxy environment variables. Provide permitted direct HTTPS access for those operations, or prepopulate the documented Syft cache for offline collection. Controller proxy support for the CLI download alone does not make all operations proxy-enabled. Preflight tests neither connection.
 

@@ -40,6 +40,6 @@ Build comparison reads only bounded, explicitly named artifacts of the previous 
 
 ## Reporting
 
-Use this repository's private GitHub vulnerability reporting. Include the plugin, Jenkins, CLI and Java versions and a synthetic reproduction. Do not publish real tokens, inventories, cloud identifiers or private build logs.
+For vulnerabilities in this Jenkins plugin, follow the [Jenkins private security reporting process](https://www.jenkins.io/security/reporting/). Include the plugin, Jenkins, CLI and Java versions and a synthetic reproduction. Do not publish real tokens, inventories, cloud identifiers or private build logs.
 
 Global authority settings explicitly require `Jenkins.ADMINISTER` both on the configuration page and when binding updates. `Jenkins.MANAGE` is intentionally insufficient because these allowlists grant credential use, host access and remote write authority. The custom file reader is separate from workspace containment: it bounds bytes, refuses symlink/non-regular/hardlinked files and uses a no-follow open. Inventory copies create a new file and set private permissions before writing content; they never replace an existing destination. Same-user concurrent filesystem tampering remains outside the boundary described above.

@@ -1,18 +1,16 @@
 # Jenkins: de la instalare la prima verificare
 
-Codul pluginului, documentația și release-urile curente sunt în [awarely-scan-plugin](https://github.com/awarelyeu/awarely-scan-plugin). Publicarea în Jenkins Update Center așteaptă aprobarea de hosting.
+Codul pluginului, documentația și release-urile curente sunt în [awarely-scan-plugin](https://github.com/jenkinsci/awarely-scan-plugin). Hosting-ul Jenkins și permisiunile de publicare sunt aprobate; pregătim primul release găzduit de Jenkins.
 
-Acest ghid acoperă versiunea stabilă 0.2.0, distribuită pe GitHub. Începe pe un Jenkins de staging și folosește HPI-ul verificat conform [ghidului de release](releases.md).
+Acest ghid acoperă release-urile găzduite de Jenkins și HPI-ul istoric 0.2.0 de pe GitHub. Începe pe un Jenkins de staging. [Ghidul de release](releases.md) explică formatele și verificarea.
 
 ## 1. Pregătește Jenkins o singură dată
 
 Ai nevoie de Jenkins 2.580.1 sau mai nou, un Java compatibil cu versiunea Jenkins (testăm cu JDK 21) și un agent Linux amd64 sau arm64 care rulează fără root. Controllerul trebuie să aibă zero executori. Build-ul aplicației poate necesita Node.js/npm, Python ori Maven/Java; scannerul citește fișiere deja existente și nu instalează aceste runtime-uri.
 
-Descarcă HPI-ul din [release-ul pluginului](https://github.com/awarelyeu/awarely-scan-plugin/releases/tag/v0.2.0) și urmează [verificarea provenienței și checksum-ului](releases.md). Un plugin poate executa cod pe controller.
+Pentru un release găzduit de Jenkins, deschide **Manage Jenkins → Plugins → Available plugins**, caută **Awarely Scan**, selectează-l și instalează-l. Jenkins rezolvă dependențele necesare. Pentru Jenkinsfile, instalează și **Pipeline**. Repornește după terminarea build-urilor și confirmă că **Awarely Scan** apare în **Installed plugins**, fără eroare de încărcare. Verifică avertismentele de securitate din **Manage Jenkins**.
 
-În **Manage Jenkins → Plugins → Available plugins**, instalează sau actualizează dependențele: **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** și **Commons Compress API**. Jenkins rezolvă și dependențele lor. Pentru Jenkinsfile, instalează și **Pipeline**. Verifică avertismentele de securitate din **Manage Jenkins**.
-
-Apoi deschide **Plugins → Advanced settings → Deploy Plugin**, selectează HPI-ul verificat și încarcă-l. Repornește Jenkins după terminarea build-urilor. Confirmă că **Awarely Scan** apare în **Installed plugins**, fără eroare de încărcare. HPI-ul se distribuie aici; pluginul nu este încă listat în Jenkins Update Center.
+Dacă primul release nu apare încă, actualizează metadatele Update Center și verifică [pagina pluginului](https://plugins.jenkins.io/awarely-scan/). Propagarea poate dura. Pentru instalarea istorică/manuală, descarcă [HPI-ul 0.2.0 păstrat](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0), urmează [verificarea originală a provenienței și checksum-ului](releases.md), instalează **Credentials**, **Plain Credentials**, **Branch API**, **SCM API**, **Jackson 2 API** și **Commons Compress API**, apoi încarcă HPI-ul în **Plugins → Advanced settings → Deploy Plugin**. Versiunea istorică 0.2.0 nu include corecțiile ulterioare din review-ul Jenkins.
 
 În **Manage Jenkins → System → Awarely Scan**, administratorul configurează:
 
@@ -25,7 +23,7 @@ Apoi deschide **Plugins → Advanced settings → Deploy Plugin**, selectează H
 
 O scanare locală de aplicație nu necesită cont sau credențiale Monitor. Cache-ul se află în `.awarely-scan` sub directorul agentului, în afara workspace-ului, cu permisiuni doar pentru proprietar. Pentru utilizare fără descărcări, administratorul pregătește arhiva CLI fixată și cache-ul Syft verificat în avans. O arhivă absentă sau modificată oprește pasul.
 
-**Conexiunile de rețea:** pe `main` (următorul release după v0.2.0), controllerul descarcă arhiva CLI absentă folosind proxy-ul global Jenkins și lista de excepții. Configurează proxy-ul în **Manage Jenkins → Plugins → Advanced settings**. Controllerul verifică digestul fixat și trimite arhiva publică prin Jenkins Remoting; agentul o verifică din nou înainte de execuție. Credențialele proxy rămân pe controller. Arhiva deja prezentă în cache nu necesită descărcare. În v0.2.0, CLI-ul este încă descărcat direct de agent.
+**Conexiunile de rețea:** în release-urile găzduite de Jenkins după versiunea istorică v0.2.0, controllerul descarcă arhiva CLI absentă folosind proxy-ul global Jenkins și lista de excepții. Configurează proxy-ul în **Manage Jenkins → Plugins → Advanced settings**. Controllerul verifică digestul fixat și trimite arhiva publică prin Jenkins Remoting; agentul o verifică din nou înainte de execuție. Credențialele proxy rămân pe controller. Arhiva deja prezentă în cache nu necesită descărcare. În v0.2.0, CLI-ul este încă descărcat direct de agent.
 
 Descărcarea Syft și cererile Monitor Check/Sync pornesc în continuare de pe agent prin CLI-ul fixat. Ele **nu** moștenesc proxy-ul controllerului Jenkins sau variabilele de mediu pentru proxy. Permite accesul HTTPS direct necesar sau pregătește cache-ul Syft pentru colectare offline. Suportul proxy pentru descărcarea CLI nu înseamnă că toate operațiile folosesc proxy-ul. Preflight nu testează conexiunile.
 

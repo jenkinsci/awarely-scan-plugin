@@ -2,11 +2,11 @@
 
 Use JDK 21 and Maven. Run `mvn -B -ntp verify` from this repository root. The output is `target/awarely-scan.hpi`; local snapshots are for development only. The Jenkins baseline and dependency BOM are in `pom.xml`.
 
-Open a pull request against `main` with a focused description, relevant validation and documentation in both English and Romanian where user behavior changes. Do not commit tokens, private inventories, lab addresses or production configuration. Use [private reporting](SECURITY.md#reporting) for security issues.
+Open a pull request against `main` in `jenkinsci/awarely-scan-plugin` with a focused description, relevant validation and documentation in both English and Romanian where user behavior changes. Do not commit tokens, private inventories, lab addresses or production configuration. Use [private reporting](SECURITY.md#reporting) for security issues.
 
 GitHub Actions builds on Linux amd64 and arm64, checks for committed secrets, and runs the Jenkins-specific CodeQL rules. A green scan job is not proof that there are no findings: maintainers must review the Code Scanning alerts. Changes to managed tool versions must use `scripts/pin-cli.py` and preserve the authenticated source/workflow/tag/digest checks.
 
-`Jenkinsfile` supplies the Jenkins project `buildPlugin()` entry point once hosting is approved. `.mvn/` enables Jenkins Incrementals; publication still requires infrastructure permissions. Release automation is deliberately gated as described in [hosting readiness](docs/hosting.md).
+`Jenkinsfile` supplies the active Jenkins project `buildPlugin()` CI entry point. `.mvn/` enables Jenkins Incrementals; publication still requires infrastructure permissions. Release automation is deliberately gated as described in [hosting readiness](docs/hosting.md).
 
 ## Global configuration persistence
 

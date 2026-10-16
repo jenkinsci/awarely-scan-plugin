@@ -1,10 +1,10 @@
 # Jenkins project hosting readiness
 
-Status: [hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383) submitted on 2026-10-14. The automated hosting checker passed after the metadata/build-policy corrections and account synchronization. The subsequent security findings were addressed and the official security scan passed on 2026-10-15. Maintainer code review is in progress; hosting approval is still pending. Stable GitHub release 0.2.0 is available; it is not an Update Center release.
+Status: [hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383) was approved and completed on 2026-10-16. The canonical repository is **jenkinsci/awarely-scan-plugin**. [Release permissions PR #5388](https://github.com/jenkins-infra/repository-permissions-updater/pull/5388) is merged with CD enabled; the maintainer accepted the organization invitation and Jenkins-provisioned Maven credentials are present. Official Jenkins CI is active. The first Update Center release is being prepared; historical GitHub 0.2.0 is not an Update Center release.
 
 ## Prepared in this repository
 
-- Public standalone repository: https://github.com/awarelyeu/awarely-scan-plugin
+- Canonical repository: https://github.com/jenkinsci/awarely-scan-plugin
 - Stable identity: `io.jenkins.plugins:awarely-scan`, name `Awarely Scan`, packaging `hpi`.
 - Apache-2.0 license in `LICENSE` and `pom.xml`; existing dependency licenses retained.
 - Plugin source, tests, English/Romanian how-to, security boundaries and contributor guide at the repository root.
@@ -24,18 +24,18 @@ Status: [hosting request #5383](https://github.com/jenkins-infra/repository-perm
 
 The first hosting-checker corrections configure `jenkins.baseline` for both core and the BOM, update the BOM to `7169.vb_32a_cfd93fa_6`, enable strict bundled-artifact and obsolete/deprecated dependency checks, and inherit Java configuration from the plugin parent. The SCM developer connection uses the Git SSH syntax supported by Jenkins's plugin compatibility tester. The minimum core remains **2.580.1**: on 2026-10-14 this is the first release of the active LTS line, while 2.580.3 is not published. Jenkins's baseline guidance recommends `.1` for the active LTS line and `.3` for historical lines. No controller upgrade is required for this metadata correction.
 
-The POM project URL and CODEOWNERS team now identify the requested Jenkins repository/team. They are prepared for hosting and do not imply the repository or team already exists. Maintainer release permissions come from the hosting request rather than a POM `developers` block. Both public account reports now include `awarely_ro`; the hosting checker confirmed the request was in order.
+The POM, SCM links and CODEOWNERS now identify the approved Jenkins repository/team. Maintainer release permissions come from the hosting request rather than a POM `developers` block. Both public account reports now include `awarely_ro`; the hosting checker confirmed the request was in order.
 
 The [hosting security scan](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383#issuecomment-6172705261) raised two findings:
 
 - The credential dropdown endpoint now requires POST, retaining its item-level `Item.CONFIGURE` authorization check. Jenkins's existing credentials selector already sends POST requests with a CSRF crumb. `AuthorityTest` exercises the HTTP endpoint and the authenticated configuration form, including rejection of GET and POST requests without a valid crumb and refusal to enumerate credentials for read-only users.
 - `MonitorCredential.sourceKey` is a non-secret SHA-256 identity derived only from canonical API origin, application ID and source ID. It does not contain or hash the token. A field-specific `jenkins/plaintext-storage` suppression documents this false positive. `MonitorCredentialTest` checks its known digest, token rotation, canonical origin handling, persisted writer protection and token-free persisted metadata. The digest algorithm is unchanged so existing source bindings remain effective.
 
-These changes are in the source tree for the next release; they do not replace the already published 0.2.0 HPI. The [official re-scan passed](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383#issuecomment-6203413705). Await the hosting team's decision.
+These changes are in the source tree for the next release; they do not replace the already published 0.2.0 HPI. The [official re-scan passed](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383#issuecomment-6203413705). Hosting was subsequently approved.
 
-The hosting team forks or transfers the entire repository into `jenkinsci/awarely-scan-plugin`, grants maintainers access and arranges artifact permissions. They may request changes. No repository configuration can pre-approve this step.
+The hosting team forked the repository into `jenkinsci/awarely-scan-plugin`, granted maintainer access and arranged artifact permissions.
 
-After they confirm the canonical repository, update the `gitHubRepo` POM property and repository links/badges/reporting URLs to `jenkinsci/awarely-scan-plugin` in the hosting review. Follow the team's fork-network instructions; do not delete the original repository before their explicit handoff instructions and preservation of its auxiliary data. Historical CLI/preview URLs stay under `awarelyeu/awarely-sbom-scanner` permanently.
+The POM `gitHubRepo`, active documentation, badges and reporting links now use `jenkinsci/awarely-scan-plugin`. All six historical GitHub releases are preserved there with identical assets and original provenance identity. Keep the original repository available as a read-only historical archive until the hosting team coordinates a fork-network handoff that preserves releases, review history and existing download URLs. Do not use GitHub's destructive detachment/deletion actions as a shortcut. The original scanner preview remains under `awarelyeu/awarely-sbom-scanner`.
 
 The official CD workflow is already in `.github/workflows/cd.yml`. It:
 
@@ -45,7 +45,7 @@ The official CD workflow is already in `.github/workflows/cd.yml`. It:
 - uses only Jenkins-provisioned `MAVEN_USERNAME` and `MAVEN_TOKEN`;
 - delegates CI-status verification and publication to the official Jenkins reusable workflow.
 
-Leave `JENKINS_CD_APPROVED` unset until Jenkins reviews this workflow and the corresponding repository-permissions-updater CD configuration, provisions credentials and enables successful `ci.jenkins.io` builds. Then run validation first; a subsequent manual release run may clear `validate_only`. Never bypass the Jenkins CI verification. The POM already uses `${changelist}` with Jenkins's standard Incrementals configuration, so no runtime implementation rewrite is needed.
+Hosting/CD review, the merged CD permissions and provisioned credentials satisfy the activation prerequisites. Enable `JENKINS_CD_APPROVED=true`, run validation first after the default-branch Jenkins build succeeds, and inspect the generated draft. A subsequent manual release run may clear `validate_only`. Never bypass the Jenkins CI verification. The POM already uses `${changelist}` with Jenkins's standard Incrementals configuration, so no runtime implementation rewrite is needed.
 
 Jenkins-hosted releases go to the Jenkins Maven repository, from which update sites obtain plugins. After hosting, development previews should use Incrementals; the experimental update center is deprecated. The pre-hosting `preview-release.yml` is restricted to `awarelyeu/awarely-scan-plugin` and produces verified HPI downloads for manual staging tests. A GitHub alpha/beta release alone is not publication to Jenkins.
 
