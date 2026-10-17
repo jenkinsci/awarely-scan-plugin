@@ -8,12 +8,12 @@ Generate an SBOM during a build, check it with Awarely Monitor, and explicitly s
 
 [English walkthrough](docs/how-to.md) · [Ghid în română](docs/how-to.ro.md) · [Security boundaries](SECURITY.md)
 
-This is the dedicated plugin repository. The [Awarely CLI](https://github.com/awarelyeu/awarely-sbom-scanner) has its own source and release cycle. Jenkins project hosting and release permissions are approved. The first official release has been published to the Jenkins artifact repository; Update Center and plugin-site indexing can follow later. See [hosting readiness](docs/hosting.md).
+This is the dedicated plugin repository. The [Awarely CLI](https://github.com/awarelyeu/awarely-sbom-scanner) has its own source and release cycle. Jenkins project hosting and release permissions are approved. The official release is available in the [Jenkins Update Center](https://plugins.jenkins.io/awarely-scan/). Install **Awarely Scan** from **Manage Jenkins → Plugins → Available plugins**; existing installations use **Updates**. See [hosting readiness](docs/hosting.md).
 
 [![Jenkins CI](https://ci.jenkins.io/job/Plugins/job/awarely-scan-plugin/job/main/badge/icon)](https://ci.jenkins.io/job/Plugins/job/awarely-scan-plugin/job/main/)
 [![Jenkins Security Scan](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml/badge.svg)](https://github.com/jenkinsci/awarely-scan-plugin/actions/workflows/jenkins-security-scan.yml)
 
-Download the preserved historical **0.2.0** release from [this repository's releases](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0). The historical **0.1.0-alpha.1** preview and its original signatures remain in the scanner repository; see [release verification](docs/releases.md).
+For historical reference, the preserved **0.2.0** release remains in [this repository's releases](https://github.com/jenkinsci/awarely-scan-plugin/releases/tag/v0.2.0). The historical **0.1.0-alpha.1** preview and its original signatures remain in the scanner repository; see [release verification](docs/releases.md).
 
 ## Supported workflows
 

@@ -1,6 +1,6 @@
 # Jenkins project hosting readiness
 
-Status: [hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383) was approved and completed on 2026-10-16. The canonical repository is **jenkinsci/awarely-scan-plugin**. [Release permissions PR #5388](https://github.com/jenkins-infra/repository-permissions-updater/pull/5388) is merged with CD enabled; the maintainer accepted the organization invitation and Jenkins-provisioned Maven credentials are present. Official Jenkins CI is active. The first official release, **18.v7f17b_86cf4b_8**, was published through Jenkins CD on 2026-10-16. Update Center and plugin-site indexing may follow later; historical GitHub 0.2.0 is not an Update Center release.
+Status: [hosting request #5383](https://github.com/jenkins-infra/repository-permissions-updater/issues/5383) was approved and completed on 2026-10-16. The canonical repository is **jenkinsci/awarely-scan-plugin**. [Release permissions PR #5388](https://github.com/jenkins-infra/repository-permissions-updater/pull/5388) is merged with CD enabled; the maintainer accepted the organization invitation and Jenkins-provisioned Maven credentials are present. Official Jenkins CI is active. The first official release, **18.v7f17b_86cf4b_8**, was published through Jenkins CD on 2026-10-16. It is listed in the [Jenkins Update Center](https://plugins.jenkins.io/awarely-scan/); historical GitHub 0.2.0 is not an Update Center release.
 
 ## Prepared in this repository
 
@@ -79,4 +79,5 @@ These changes are included in Jenkins-hosted **18.v7f17b_86cf4b_8**. Existing si
 - [Official release run](https://github.com/jenkinsci/awarely-scan-plugin/actions/runs/38977793596) published `18.v7f17b_86cf4b_8` from verified commit `7f17b86cf4b8b4cfa254176fd0fb9036bfa830ff`.
 - The exact commit passed all 62 tests on ci.jenkins.io, SpotBugs and Jenkins Security Scan; no open CodeQL alerts were reported.
 - The downloaded Maven HPI matched its repository SHA-256 and declared the expected plugin ID, version and Jenkins 2.580.1 minimum.
+- An [official Update Center upgrade smoke test](releases.md#official-installation-smoke-test) on 2026-10-17 verified installation, restart/configuration persistence and npm scan/Check with synthetic staging fixtures.
 - The original repository is archived with a move notice. All six historical releases and 36 assets remain accessible in both repositories.
